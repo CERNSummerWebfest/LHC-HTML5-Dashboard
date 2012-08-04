@@ -254,7 +254,7 @@ function transitionStack() {
 
 
 $(function() {
-    $('div[rel="popover"]').popover({placement: 'bottom', delay: { show: 100, hide: 1000 }});
+    $('div[rel="popover"]').popover({trigger: 'manual', placement: 'bottom', delay: { show: 100, hide: 1000 }});
     $('div[rel="popover"]').popover('show');
     setTimeout(function(){
         $('div[rel="popover"]').popover('hide');
