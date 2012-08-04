@@ -49,7 +49,7 @@ d3.csv('data/atlas.csv', function(csv){
         d['Timestamp']=date;
     });
 
-m = csv.length/20; 
+m = csv.length/32; 
 var data = d3.layout.stack()(stream_layers(n, m)),
     //color = d3.interpolateRgb("#aad", "#556");
     color = d3.interpolateRgb("#322845", "#556");
@@ -146,11 +146,11 @@ vis.selectAll(".rule")
     .attr("x", 0)
     .attr("y", r)
     .attr("dx", 5)
-    .attr("dy", 20)
+    .attr("dy", 40)
     .attr("text-anchor", "left")
     .attr("font-size", "16px")
     .attr("fill", "#AFE01B")
-    .text(function(d){if (d!=0) return comma(d);});
+    .text(function(d){if (d!=0) return comma(d) + " L";});
 
 function stream_layers(n, m) {
     var j=0;
@@ -189,8 +189,11 @@ spinner.stop();
 function transitionGroup() {
   var group = d3.selectAll("#chart");
 
-  $("#group").toggleClass("active");
-  $("#stack").toggleClass("active");
+  if (!$("#group").hasClass("active"))
+      {
+        $("#group").toggleClass("active");
+        $("#stack").toggleClass("active");
+      }
   group.select("#group")
       .attr("class", "active");
 
@@ -219,8 +222,11 @@ function transitionStack() {
     console.log(m);
   var stack = d3.select("#chart");
 
-  $("#stack").toggleClass("active");
-  $("#group").toggleClass("active");
+  if (!$("#stack").hasClass("active"))
+      {
+        $("#stack").toggleClass("active");
+        $("#group").toggleClass("active");
+      }
 
   stack.select("#group")
       .attr("class", "first");
