@@ -11,6 +11,7 @@
         <link href='assets/css/style.css' rel='stylesheet' type='text/css'>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' type='text/javascript'></script>
         <script src='assets/js/throbber.js' type='text/javascript'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.4/bootstrap.min.js' type='text/javascript'></script>
         <script type="text/javascript">
 
             var _gaq = _gaq || [];
@@ -28,11 +29,12 @@
     <body>
         <a href="https://github.com/CERNSummerWebfest/LHC-HTML5-Dashboard"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
         <div class="container-fluid">
-            <div class="row-fluid">
-                <div id="he" class="span12" style="text-align:center">
+            <div class="row-fluid" style="padding:20px;">
+                <div class="span6">
                     <h1>Luminosity for ATLAS and CMS</h1>
-                    <br/>
-                    <div class="btn-group" data-toggle="buttons-radio" style="margin-left:45%;">
+                </div>
+                <div class="span3">
+                    <div id="btns" class="btn-group" rel="popover" data-content="Use the buttons to stack or group the colums" title="Controls" data-toggle="buttons-radio" style="margin-left:45%;">
                         <button class='btn btn-large btn-inverse' id='group' onclick='transitionGroup()'>
                             Group
                         </button>
@@ -40,6 +42,10 @@
                             Stack
                         </button>
                     </div>
+                </div>
+            </div>
+            <div class="row-fluid" style="padding-top:10px;">
+                <div id="he" class="span12">
                     <div id="throbber"></div>
                     <div id=chart></div>
                 </div>

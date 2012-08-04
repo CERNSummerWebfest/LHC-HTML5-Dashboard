@@ -250,3 +250,14 @@ function transitionStack() {
         .attr("width", x({x: .9}));
   }
 }
+
+
+
+$(function() {
+    $('div[rel="popover"]').popover({placement: 'bottom', delay: { show: 100, hide: 1000 }});
+    $('div[rel="popover"]').popover('show');
+    setTimeout(function(){
+        $('div[rel="popover"]').popover('hide');
+    }, 2500);
+    
+});
