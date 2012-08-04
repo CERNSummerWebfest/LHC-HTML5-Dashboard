@@ -13,7 +13,14 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+var spinner = new Throbber({
+    color: 'black',
+    size: 90
+});
 
+spinner.appendTo (document.getElementById('throbber'));
+
+spinner.Start();
 
 var m=1;
 var n=2;
@@ -139,6 +146,8 @@ function stream_index(d, i) {
     //console.log(csv[i]['Timestamp']);
   return {x: i, y: Math.max(0, d)};
 }
+
+spinner.stop();
 
 });
 
