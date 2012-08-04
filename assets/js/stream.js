@@ -20,7 +20,7 @@ var spinner = new Throbber({
 
 spinner.appendTo (document.getElementById('throbber'));
 
-spinner.Start();
+spinner.start();
 
 var m=1;
 var n=2;
