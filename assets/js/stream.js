@@ -38,18 +38,21 @@ var margin = 20,
 
 d3.csv('data/atlas.csv', function(csv){ 
     var dates = [];
+    var values = [];
     var format = d3.time.format("%H:%M:%S");
     csv.map(function(d){
         var s = d['Timestamp'].split(" ");
         s = s[1].split(".");
         var date = format.parse(s[0]); 
         dates.push(date);
+        values.push(parseFloat(d['Value']));
         d['Timestamp']=date;
     });
 
 m = csv.length/20; 
 var data = d3.layout.stack()(stream_layers(n, m)),
-    color = d3.interpolateRgb("#aad", "#556");
+    //color = d3.interpolateRgb("#aad", "#556");
+    color = d3.interpolateRgb("#322845", "#556");
 
 
 margin = 20,
@@ -70,6 +73,12 @@ margin = 20,
     y0 = function(d) { return height - d.y0 * height / my; },
     y1 = function(d) { return height - (d.y + d.y0) * height / my; },
     y2 = function(d) { return d.y * height / mz; }; // or `my` to not rescale
+
+    values = values.slice(0,parseInt(m));
+var r = d3.scale.linear()
+    .domain([0,d3.max(values)])
+    //.range([height-margin,0]);
+    .range([height,0]);
 
 var vis = d3.select("#chart")
   .append("svg")
@@ -116,6 +125,32 @@ vis.append("line")
     .attr("x2", width - x({x: .1}))
     .attr("y1", height)
     .attr("y2", height);
+
+
+vis.selectAll("line")
+    .data(r.ticks(5))
+    .enter().append("line")
+    .attr("x1", width)
+    .attr("x2", 0 )
+    .attr("y1", r)
+    .attr("y2", r)
+    //.style("stroke", "#ccc");
+    .style("stroke", "#AFE01B");
+
+var comma_r = d3.format("2.2s");
+var comma = d3.format(",");
+
+vis.selectAll(".rule")
+    .data(r.ticks(5))
+    .enter().append("text")
+    .attr("x", 0)
+    .attr("y", r)
+    .attr("dx", 5)
+    .attr("dy", 20)
+    .attr("text-anchor", "left")
+    .attr("font-size", "16px")
+    .attr("fill", "#AFE01B")
+    .text(function(d){if (d!=0) return comma(d);});
 
 function stream_layers(n, m) {
     var j=0;
