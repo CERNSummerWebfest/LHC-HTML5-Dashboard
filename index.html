@@ -12,6 +12,8 @@
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' type='text/javascript'></script>
         <script src='assets/js/throbber.js' type='text/javascript'></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.4/bootstrap.min.js' type='text/javascript'></script>
+        <script src='http://cdn.popcornjs.org/code/dist/popcorn-complete.min.js' type='text/javascript'></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.5.3/modernizr.min.js' type='text/javascript'></script>
         <script type="text/javascript">
 
             var _gaq = _gaq || [];
@@ -28,13 +30,45 @@
     </head>
     <body>
         <a href="https://github.com/CERNSummerWebfest/LHC-HTML5-Dashboard"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        <div id="tutorial">
+            <div id="video-container">
+                <video id="video">
+                    <source src="http://www.citizencyberscience.net/t4t-webapp/img/lum.webm" type="video/webm"></source>
+                </video>
+
+                    <div id="attrib"></div>
+                    <div id="exit" class="btn-group"  data-toggle="buttons-radio">
+
+                        <button id="play" class='btn btn-inverse active' onclick='restartVideo()'>
+                            <i class="icon icon-white icon-play"></i>
+                        </button>
+                        <button id="pause" class='btn btn-inverse' onclick='pauseVideo()'>
+                            <i class="icon icon-white icon-pause"></i>
+                        </button>
+                        <button id="stop" class='btn btn-inverse' onclick='stopVideo()'>
+                            <i class="icon icon-white icon-stop"></i>
+                        </button>
+                    </div>
+
+            </div>
+        </div>
+
         <div class="container-fluid">
-            <div class="row-fluid" style="padding:20px;">
+            <div id="warning" class="row-fluid">
+                <div class="span12">
+                    <h1>Ooops! You are using a really old browser!!</h1>
+                    <br/>
+                    <p>We are sorry, but you cannot see this page because you are using a really old web browser.</p>
+                    <p>We use the latest HTML5 technologies for rendering the charts, playing the video, and CSS effects.</p>
+                    <p>If you want, you can try with the open source web browser Mozilla Firefox or Google Chrome.</p>
+                </div>
+            </div>
+            <div class="row-fluid skeleton" style="padding-top:20px;">
                 <div class="span6">
                     <h1>Luminosity for ATLAS and CMS</h1>
                 </div>
-                <div class="span3">
-                    <div id="btns" class="btn-group" rel="popover" data-content="Use the buttons to stack or group the colums" title="Controls" data-toggle="buttons-radio" style="margin-left:45%;">
+                <div class="span3" rel="popover" data-content="Use the buttons to stack or group the colums" title="Controls">
+                    <div id="btns" class="btn-group"  data-toggle="buttons-radio">
                         <button class='btn btn-large btn-inverse' id='group' onclick='transitionGroup()'>
                             Group
                         </button>
@@ -42,6 +76,11 @@
                             Stack
                         </button>
                     </div>
+                </div>
+                <div class="span3">
+                <button class='btn btn-large btn-primary' onclick='startVideo()'>
+                    <i class="icon icon-white icon-play"></i> What means Luminosity? 
+                </button>
                 </div>
             </div>
             <div class="row-fluid" style="padding-top:10px;">
@@ -52,13 +91,14 @@
             </div>
         </div>
         <script src="assets/js/stream.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/video.js" type="text/javascript" charset="utf-8"></script>
         <footer>
             <div style="margin-left:30px;">
                 <div id="legend" class="span4"></div>
-                <a class="pull-right" href="http://www.w3.org/html/logo/">
-                    <img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-graphics-multimedia-semantics.png" width="229" height="64" alt="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Multimedia, and Semantics" title="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Multimedia, and Semantics">
+                <a  class="pull-right" href="http://www.w3.org/html/logo/">
+                    <img  src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-graphics-multimedia-semantics.png" width="229" height="64" alt="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Multimedia, and Semantics" title="HTML5 Powered with CSS3 / Styling, Graphics, 3D &amp; Effects, Multimedia, and Semantics">
                 </a>
             </div>
-    </footer>
+        </footer>
     </body>
 </html>

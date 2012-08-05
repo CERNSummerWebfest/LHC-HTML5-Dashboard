@@ -15,3 +15,26 @@ h1 {
     width: 100px;
     height: 100px;
 }
+
+#tutorial {
+    display: none;
+    position: absolute;
+    z-index: 50000;
+    width: 100%;
+    background: rgb(0,0,0);
+    opacity: 1;
+}
+
+#attrib {
+    display: none;
+    position: absolute;
+    z-index: 90000;
+    top:85%;
+    left:20%;
+    opacity: 1;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 200;
+    font-size: 42px;
+    color: white;
+    text-align: center;
+}
