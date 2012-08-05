@@ -52,7 +52,8 @@ d3.csv('data/atlas.csv', function(csv){
 m = csv.length/32; 
 var data = d3.layout.stack()(stream_layers(n, m)),
     //color = d3.interpolateRgb("#aad", "#556");
-    color = d3.interpolateRgb("#322845", "#556");
+    //color = d3.interpolateRgb("#322845", "#556");
+    color = d3.interpolateRgb("#586e75", "#93a1a1");
 
 
 margin = 20,
@@ -116,6 +117,7 @@ var labels = vis.selectAll("text.label")
     .attr("dx", x({x: .45}))
     .attr("dy", ".71em")
     .attr("text-anchor", "left")
+    
     .text(function(d, i) { 
         if ( ( i %40 )==0 ) return format(csv[i]['Timestamp']);
     });
@@ -134,8 +136,8 @@ vis.selectAll("line")
     .attr("x2", 0 )
     .attr("y1", r)
     .attr("y2", r)
-    //.style("stroke", "#ccc");
-    .style("stroke", "#AFE01B");
+    //.style("stroke", "#AFE01B");
+    .style("stroke", "#ee7544");
 
 var comma_r = d3.format("2.2s");
 var comma = d3.format(",");
@@ -148,8 +150,8 @@ vis.selectAll(".rule")
     .attr("dx", 5)
     .attr("dy", 40)
     .attr("text-anchor", "left")
-    .attr("font-size", "16px")
-    .attr("fill", "#AFE01B")
+    .attr("font-size", "18px")
+    .attr("fill", "white")
     .text(function(d){if (d!=0) return comma(d) + " L";});
 
 function stream_layers(n, m) {
@@ -181,6 +183,33 @@ function stream_index(d, i) {
     //console.log(csv[i]['Timestamp']);
   return {x: i, y: Math.max(0, d)};
 }
+
+var legend = d3.select("#legend")
+  .append("svg")
+    .attr("width", width/3)
+    .attr("height", 100);
+
+legend.selectAll("line")
+    .data(r.ticks(1))
+    .enter().append("line")
+    .attr("x1", 50)
+    .attr("x2", 0 )
+    .attr("y1", function(d,i){return i*20 + 20})
+    .attr("y2", function(d,i){return i*20 + 20})
+    .attr("stroke-width", 20)
+    .style("stroke", function(d,i){return color(i)});
+
+legend.selectAll("text.label")
+    .data(r.ticks(1))
+    .enter().append("text")
+    .attr("x", 60)
+    .attr("y", function(d,i){return i*20 + 28})
+    .attr("font-family", "Source Sans Pro")
+    .attr("font-weight", "200")
+    .attr("font-size", "22px")
+    .style("fill", function(d,i){return color(i)})
+    .text(function(d,i){if (i==1) {return "ATLAS";} else { return "CMS" };});
+
 
 spinner.stop();
 
@@ -252,12 +281,13 @@ function transitionStack() {
 }
 
 
-
 $(function() {
     $('div[rel="popover"]').popover({trigger: 'manual', placement: 'bottom', delay: { show: 100, hide: 1000 }});
     $('div[rel="popover"]').popover('show');
     setTimeout(function(){
         $('div[rel="popover"]').popover('hide');
-    }, 2500);
+    }, 4500);
     
 });
+
+
